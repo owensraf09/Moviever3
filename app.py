@@ -889,7 +889,7 @@ def get_data() -> pd.DataFrame | None:
 
 
 
-#get out top 10 films of ht eprevious month
+#get our top 10 films of the previous month
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
@@ -1001,9 +1001,13 @@ def render_top_gems_previous_month_table(df: pd.DataFrame) -> None:
             avg_popularity = df_top_gems["popularity"].mean()
             st.metric("Average Popularity", f"{avg_popularity:.2f}")
 
+
+st.title("Moviever Film Dashboard")
+
+
 st.markdown("""
 Welcome to the **Moviever Explorer**, your gateway to discovering hidden gems and analyzing movie trends! 
-This app analyses our movie datatabse to bring you comprehensive movie data with powerful filtering and analysis tools.
+This app analyses our movie database to bring you comprehensive movie data with powerful filtering and analysis tools.
 """)
 
 
