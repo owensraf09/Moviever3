@@ -1,6 +1,7 @@
 """
 Sidebar filter functions for user interface filters.
 """
+
 import streamlit as st
 from ast import literal_eval
 import config
@@ -42,6 +43,7 @@ def render_sidebar_filters(df):
             "include_missing_dates": False,
             "min_year": None,
             "max_year": None,
+            "original_language": "All",
         }
 
     g = st.session_state[SKEY]
@@ -161,6 +163,22 @@ def render_sidebar_filters(df):
             "Genre", genres_list, index=genres_list.index(g["genre"]), key=W + "genre"
         )
 
+        # Filter by language
+        all_languages = set()
+
+        all_languages.update(df["original_language"].dropna())
+
+        language_list = ["All"] + sorted([lang for lang in all_languages if lang])
+        if g["original_language"] not in language_list:
+            g["original_language"] = "All"
+
+        original_language = st.selectbox(
+            "Language",
+            language_list,
+            index=language_list.index(g["original_language"]),
+            key=W + "language",
+        )
+
         st.write("**Year Range**")
         min_year = st.slider(
             "Min Year",
@@ -197,6 +215,7 @@ def render_sidebar_filters(df):
         g["max_year"] = max_year
         g["adult"] = adult
         g["include_missing_dates"] = include_missing_dates
+        g["original_language"] = original_language
 
         st.divider()
 
@@ -228,4 +247,5 @@ def render_sidebar_filters(df):
         "min_year": g["min_year"],
         "max_year": g["max_year"],
         "include_missing_dates": g["include_missing_dates"],
+        "original_language": g["original_language"],
     }

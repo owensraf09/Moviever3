@@ -1,6 +1,7 @@
 """
 Main data loading function with CSV persistence and TMDB fetching.
 """
+
 import streamlit as st
 import pandas as pd
 import time
@@ -25,7 +26,7 @@ def get_data() -> pd.DataFrame | None:
     if session_key in st.session_state:
         cached = st.session_state.get(session_key)
         if isinstance(cached, pd.DataFrame) and len(cached) > 0:
-            return cached
+            return prepare_df(cached)
 
     # Second: Check CSV file (fast, no API calls)
     csv_data = load_data_from_csv()
@@ -38,7 +39,7 @@ def get_data() -> pd.DataFrame | None:
                 f"📁 Loaded {len(csv_data):,} movies from CSV cache. Use 'Refresh Data' to fetch fresh data from TMDB."
             )
             st.session_state.csv_loaded_notified = True
-        return csv_data
+        return prepare_df(csv_data)
 
     # Third: Fetch from TMDB (slow, with progress)
     # show progress only on first load in this session

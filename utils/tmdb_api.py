@@ -1,6 +1,7 @@
 """
 TMDB API fetching functions for retrieving movie data.
 """
+
 import streamlit as st
 import pandas as pd
 import requests
@@ -108,3 +109,15 @@ def _fetch_tmdb_pages_cached(max_pages: int = config.MAX_TMDB_PAGES) -> pd.DataF
 def fetch_tmdb_all_pages(max_pages: int = config.MAX_TMDB_PAGES) -> pd.DataFrame:
     """Public fetch function."""
     return _fetch_tmdb_pages_cached(max_pages=max_pages)
+
+
+@st.cache_data(ttl=config.LANGUAGE_CACHE_TTL)
+def fetch_tmdb_lang_codes() -> pd.DataFrame:
+    headers = {
+        "accept": "application/json",
+        "Authorization": TMDB_BEARER_TOKEN,
+    }
+    response = requests.get(
+        "https://api.themoviedb.org/3/configuration/languages", headers=headers
+    )
+    return pd.DataFrame(response.json()).set_index("iso_639_1")

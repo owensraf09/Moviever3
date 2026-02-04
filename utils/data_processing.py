@@ -1,9 +1,11 @@
 """
 Data processing functions for preparing and filtering movie data.
 """
+
 import pandas as pd
 import numpy as np
 from utils.genre import fetch_genre_map
+from utils.tmdb_api import fetch_tmdb_lang_codes
 
 
 def prepare_df(df: pd.DataFrame) -> pd.DataFrame:
@@ -33,6 +35,13 @@ def prepare_df(df: pd.DataFrame) -> pd.DataFrame:
     # Add genres_str column (comma-separated string)
     df["genres_str"] = df["genres"].apply(lambda x: ", ".join(x) if x else "Unknown")
 
+    # Map language ISO 639-1 tags to names
+    lang_map = fetch_tmdb_lang_codes()
+    if lang_map is not None:
+        df["original_language"] = df["original_language"].map(
+            lambda x: lang_map.loc[x, "english_name"]
+        )
+
     return df
 
 
@@ -57,6 +66,13 @@ def filter_df(df: pd.DataFrame, filters: dict) -> pd.DataFrame:
                 df_filtered["genres_str"].str.contains(
                     filters["genre"], case=False, na=False
                 )
+            ]
+
+    # Filter by language
+    if filters["original_language"] != "All":
+        if "original_language" in df_filtered.columns:
+            df_filtered = df_filtered[
+                df_filtered["original_language"] == filters["original_language"]
             ]
 
     df_filtered = df_filtered[df_filtered["vote_average"] >= filters["min_rating"]]
