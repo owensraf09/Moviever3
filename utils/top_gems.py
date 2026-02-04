@@ -107,7 +107,7 @@ def render_top_gems_previous_month_table(df: pd.DataFrame) -> None:
     # Display the table
     st.dataframe(df_table, use_container_width=True, height=400)
 
-    render_stats(df_top_gems)
+    #render_stats(df_top_gems)
 
 
 def render_top_gems_previous_month_cards(df: pd.DataFrame) -> None:
@@ -140,4 +140,4 @@ def render_top_gems_previous_month_cards(df: pd.DataFrame) -> None:
 
     render_cards(df_display, 5)
 
-    render_stats(df_top_gems)
+    #render_stats(df_top_gems)
