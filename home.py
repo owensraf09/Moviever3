@@ -28,6 +28,9 @@ from utils.top_gems import (
     render_top_gems_previous_month_cards,
 )
 
+st.image("Mlogo.png", width=200)
+
+
 st.title("Moviever Film Dashboard")
 
 
