@@ -10,7 +10,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import config
 
-
+# This was added by Alex
 #123
 # Load environment variables from .env file
 # Note: .env file must be saved as UTF-8 encoding (without BOM)
