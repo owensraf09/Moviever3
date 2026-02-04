@@ -1001,6 +1001,13 @@ def render_top_gems_previous_month_table(df: pd.DataFrame) -> None:
             avg_popularity = df_top_gems["popularity"].mean()
             st.metric("Average Popularity", f"{avg_popularity:.2f}")
 
+st.markdown("""
+Welcome to the **Moviever Explorer**, your gateway to discovering hidden gems and analyzing movie trends! 
+This app analyses our movie datatabse to bring you comprehensive movie data with powerful filtering and analysis tools.
+""")
+
+
+
 # Usage example - add this to your Streamlit page
 if __name__ == "__main__":
     # Load data
@@ -1008,11 +1015,17 @@ if __name__ == "__main__":
     if df is not None:
         render_top_gems_previous_month_table(df)
 
-st.subheader("**Index**")
-st.markdown("**Home - Hidden Gems Finder**")
+
+st.subheader("📋 Index:")
+
+st.markdown("#### 🏠 Home - Hidden Gems Finder")
 st.markdown("Find high-quality, underrated movies using the Gems Score algorithm. Shows top movies with detailed info and download options.")
 
-st.markdown(" **Analytics - Data Dashboard**")
+st.markdown("#### 📊 Analytics - Data Dashboard")
 st.markdown("Visual charts and statistics about the movie dataset. Includes rating distributions, popularity trends, and year/language breakdowns.")
-st.markdown("**Browse All - Movie Browser**")
+
+st.markdown("#### 🔍 Browse All - Movie Browser")
 st.markdown("Search, sort, and browse all movies with table or card views. Includes pagination and flexible sorting options.")
+
+st.caption("💡 All pages share the same sidebar filters for consistent data exploration.")
+
