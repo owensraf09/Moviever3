@@ -893,7 +893,7 @@ def get_data() -> pd.DataFrame | None:
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
-from app import get_data
+from home import get_data
 
 def get_top_gems_previous_month(df: pd.DataFrame, top_n: int = 10) -> pd.DataFrame:
     """
@@ -1022,7 +1022,7 @@ if __name__ == "__main__":
 
 st.subheader("📋 Index:")
 
-st.markdown("#### 🏠 Home - Hidden Gems Finder")
+st.markdown("#### 🏠 Film Finder- Hidden Gems Finder")
 st.markdown("Find high-quality, underrated movies using the Gems Score algorithm. Shows top movies with detailed info and download options.")
 
 st.markdown("#### 📊 Analytics - Data Dashboard")

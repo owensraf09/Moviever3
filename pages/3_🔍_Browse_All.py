@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 st.set_page_config(page_title="Browse All", layout="wide", page_icon="🔍")
-from app import get_data, render_sidebar_filters, filter_df
+from home import get_data, render_sidebar_filters, filter_df
 import config
 
 
