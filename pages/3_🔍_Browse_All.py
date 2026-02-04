@@ -132,38 +132,6 @@ if view_mode == "Table":
 
     st.dataframe(df_table, use_container_width=True, height=500)
 else:
-
-    # # Card view
-    # cols = st.columns(3)
-    # for idx, (_, movie) in enumerate(df_page.iterrows()):
-    #     col = cols[idx % 3]
-    #     with col:
-    #         with st.container():
-    #             # Poster
-    #             if pd.notna(movie.get('poster_path')) and movie['poster_path']:
-    #                 poster_url = f"{config.TMDB_IMAGE_BASE_URL}{movie['poster_path']}"
-    #                 st.image(poster_url, use_container_width=True)
-
-    #             # Title and key info
-    #             st.markdown(f"### {movie['original_title']}")
-    #             st.caption(f"📅 {movie['release_date_str']} | 🌍 {movie['original_language']}")
-
-    #             col_metrics = st.columns(3)
-    #             with col_metrics[0]:
-    #                 st.metric("⭐", f"{movie['vote_average']:.1f}")
-    #             with col_metrics[1]:
-    #                 st.metric("👥", f"{int(movie['vote_count']):,}")
-    #             with col_metrics[2]:
-    #                 st.metric("🔥", f"{movie['popularity']:.1f}")
-
-    #             st.caption(f"💎 Gems Score: {movie['gems_score']:.3f}")
-
-    #             if pd.notna(movie.get('overview')) and movie['overview']:
-    #                 with st.expander("Overview"):
-    #                     st.write(movie['overview'][:200] + "..." if len(movie['overview']) > 200 else movie['overview'])
-
-    #             st.divider()
-
     render_cards(df_page, 3)
 
 # Download button

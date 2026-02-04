@@ -126,7 +126,7 @@ def render_top_gems_previous_month_table(df: pd.DataFrame) -> None:
 
 def render_top_gems_previous_month_cards(df: pd.DataFrame) -> None:
     """
-    Render a table showing the top 10 hidden gems of the previous month by gems_score.
+    Render ccards showing the top 10 hidden gems of the previous month by gems_score.
     """
     current_date = datetime.now()
 
@@ -151,42 +151,6 @@ def render_top_gems_previous_month_cards(df: pd.DataFrame) -> None:
     # Prepare display data
     df_display = df_top_gems.copy()
     df_display["release_date_str"] = df_display["release_date"].dt.strftime("%Y-%m-%d")
-
-    # # Select columns for display
-    # display_cols = [
-    #     "original_title",
-    #     "release_date_str",
-    #     "vote_average",
-    #     "vote_count",
-    #     "popularity",
-    #     "gems_score",
-    #     "genres_str",
-    # ]
-
-    # df_table = df_display[display_cols].copy()
-    # df_table.columns = [
-    #     "Title",
-    #     "Release Date",
-    #     "Rating",
-    #     "Vote Count",
-    #     "Popularity",
-    #     "Gems Score",
-    #     "Genres",
-    # ]
-
-    # # Format numeric columns
-    # df_table["Rating"] = df_table["Rating"].round(2)
-    # df_table["Popularity"] = df_table["Popularity"].round(2)
-    # df_table["Gems Score"] = df_table["Gems Score"].round(4)
-
-    # # Add rank column
-    # df_table.insert(0, "Rank", range(1, len(df_table) + 1))
-
-    # # Show count
-    # total_movies = len(df_table)
-
-    # # Display the table
-    # st.dataframe(df_table, use_container_width=True, height=400)
 
     render_cards(df_display, 5)
 

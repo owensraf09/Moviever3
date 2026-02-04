@@ -44,8 +44,15 @@ if __name__ == "__main__":
     # Load data
     df = get_data()
     if df is not None:
-        # render_top_gems_previous_month_table(df)
-        render_top_gems_previous_month_cards(df)
+        col, _ = st.columns([1, 3])
+
+        with col:
+            view_mode = st.radio("View Mode:", ["Cards", "Table"], horizontal=True)
+
+        if view_mode == "Cards":
+            render_top_gems_previous_month_cards(df)
+        else:
+            render_top_gems_previous_month_table(df)
 
 
 st.subheader("📋 Index:")
