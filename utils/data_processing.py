@@ -38,7 +38,7 @@ def prepare_df(df: pd.DataFrame) -> pd.DataFrame:
     # Map language ISO 639-1 tags to names
     lang_map = fetch_tmdb_lang_codes()
     if lang_map is not None:
-        df["original_language"] = df["original_language"].map(
+        df["original_language_name"] = df["original_language"].map(
             lambda x: lang_map.loc[x, "english_name"]
         )
 
@@ -69,10 +69,11 @@ def filter_df(df: pd.DataFrame, filters: dict) -> pd.DataFrame:
             ]
 
     # Filter by language
-    if filters["original_language"] != "All":
-        if "original_language" in df_filtered.columns:
+    if filters["original_language_name"] != "All":
+        if "original_language_name" in df_filtered.columns:
             df_filtered = df_filtered[
-                df_filtered["original_language"] == filters["original_language"]
+                df_filtered["original_language_name"]
+                == filters["original_language_name"]
             ]
 
     df_filtered = df_filtered[df_filtered["vote_average"] >= filters["min_rating"]]

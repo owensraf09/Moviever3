@@ -79,7 +79,7 @@ def render_table_and_details(df_filtered: pd.DataFrame) -> None:
         "vote_average",
         "vote_count",
         "popularity",
-        "original_language",
+        "original_language_name",
         "gems_score",
     ]
 
@@ -161,7 +161,7 @@ def render_table_and_details(df_filtered: pd.DataFrame) -> None:
             st.write(f"**Rating:** {selected_movie['vote_average']:.2f}")
             st.write(f"**Vote Count:** {int(selected_movie['vote_count'])}")
             st.write(f"**Popularity:** {selected_movie['popularity']:.2f}")
-            st.write(f"**Language:** {selected_movie['original_language']}")
+            st.write(f"**Language:** {selected_movie['original_language_name']}")
             st.write(f"**Gems Score:** {selected_movie['gems_score']:.3f}")
             st.write(f"**Genres:** {selected_movie.get('genres_str', 'Unknown')}")
 
@@ -193,7 +193,7 @@ def render_cards(df: pd.DataFrame, cards_per_row: int = 3):
 
                 # Title and key info
                 st.markdown(f"{movie['original_title']}")
-                
+
                 st.caption(f"💎 Gems Score: {movie['gems_score']:.3f}")
 
                 if pd.notna(movie.get("overview")) and movie["overview"]:
@@ -205,7 +205,7 @@ def render_cards(df: pd.DataFrame, cards_per_row: int = 3):
                         )
 
                 st.divider()
-        
+
         # Add vertical gap after each complete row
         if (idx + 1) % cards_per_row == 0 and idx < len(df) - 1:
             st.write("")

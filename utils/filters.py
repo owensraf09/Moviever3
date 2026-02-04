@@ -43,7 +43,7 @@ def render_sidebar_filters(df):
             "include_missing_dates": False,
             "min_year": None,
             "max_year": None,
-            "original_language": "All",
+            "original_language_name": "All",
         }
 
     g = st.session_state[SKEY]
@@ -166,16 +166,16 @@ def render_sidebar_filters(df):
         # Filter by language
         all_languages = set()
 
-        all_languages.update(df["original_language"].dropna())
+        all_languages.update(df["original_language_name"].dropna())
 
         language_list = ["All"] + sorted([lang for lang in all_languages if lang])
-        if g["original_language"] not in language_list:
-            g["original_language"] = "All"
+        if g["original_language_name"] not in language_list:
+            g["original_language_name"] = "All"
 
-        original_language = st.selectbox(
+        original_language_name = st.selectbox(
             "Language",
             language_list,
-            index=language_list.index(g["original_language"]),
+            index=language_list.index(g["original_language_name"]),
             key=W + "language",
         )
 
@@ -215,7 +215,7 @@ def render_sidebar_filters(df):
         g["max_year"] = max_year
         g["adult"] = adult
         g["include_missing_dates"] = include_missing_dates
-        g["original_language"] = original_language
+        g["original_language_name"] = original_language_name
 
         st.divider()
 
@@ -247,5 +247,5 @@ def render_sidebar_filters(df):
         "min_year": g["min_year"],
         "max_year": g["max_year"],
         "include_missing_dates": g["include_missing_dates"],
-        "original_language": g["original_language"],
+        "original_language_name": g["original_language_name"],
     }

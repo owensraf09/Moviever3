@@ -117,7 +117,7 @@ if view_mode == "Table":
         "vote_average",
         "vote_count",
         "popularity",
-        "original_language",
+        "original_language_name",
         "gems_score",
     ]
     df_table = df_page[display_cols].copy()
