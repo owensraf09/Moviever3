@@ -1,6 +1,7 @@
 """
 Rendering functions for displaying UI components, charts, and tables.
 """
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -176,3 +177,42 @@ def render_table_and_details(df_filtered: pd.DataFrame) -> None:
         file_name=f"hidden_gems_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
         mime="text/csv",
     )
+
+
+def render_cards(df: pd.DataFrame, cards_per_row: int):
+    # Card view
+    cols = st.columns(cards_per_row)
+    for idx, (_, movie) in enumerate(df.iterrows()):
+        col = cols[idx % cards_per_row]
+        with col:
+            with st.container():
+                # Poster
+                if pd.notna(movie.get("poster_path")) and movie["poster_path"]:
+                    poster_url = f"{config.TMDB_IMAGE_BASE_URL}{movie['poster_path']}"
+                    st.image(poster_url, use_container_width=True)
+
+                # Title and key info
+                st.markdown(f"### {movie['original_title']}")
+                st.caption(
+                    f"📅 {movie['release_date_str']} | 🌍 {movie['original_language']}"
+                )
+
+                col_metrics = st.columns(3)
+                with col_metrics[0]:
+                    st.metric("⭐", f"{movie['vote_average']:.1f}")
+                with col_metrics[1]:
+                    st.metric("👥", f"{int(movie['vote_count']):,}")
+                with col_metrics[2]:
+                    st.metric("🔥", f"{movie['popularity']:.1f}")
+
+                st.caption(f"💎 Gems Score: {movie['gems_score']:.3f}")
+
+                if pd.notna(movie.get("overview")) and movie["overview"]:
+                    with st.expander("Overview"):
+                        st.write(
+                            movie["overview"][:200] + "..."
+                            if len(movie["overview"]) > 200
+                            else movie["overview"]
+                        )
+
+                st.divider()

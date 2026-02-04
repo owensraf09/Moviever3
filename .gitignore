@@ -1,3 +1,4 @@
 __pycache__/app.cpython-310.pyc
 /__pycache__
 tmdb_movies_data.csv
+/utils/__pycache__
