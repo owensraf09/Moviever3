@@ -33,13 +33,3 @@ st.divider()
 
 # Table and details
 render_table_and_details(df_filtered)
-
-
-
-
-
-
-# -----------------------------
-# Top rated films of current month
-# -----------------------------
-

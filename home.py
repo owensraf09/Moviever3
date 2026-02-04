@@ -23,7 +23,10 @@ except Exception as e:
 
 # Import functions from utils modules
 from utils.data_loader import get_data
-from utils.top_gems import render_top_gems_previous_month_table
+from utils.top_gems import (
+    render_top_gems_previous_month_table,
+    render_top_gems_previous_month_cards,
+)
 
 st.title("Moviever Film Dashboard")
 
@@ -41,7 +44,8 @@ if __name__ == "__main__":
     # Load data
     df = get_data()
     if df is not None:
-        render_top_gems_previous_month_table(df)
+        # render_top_gems_previous_month_table(df)
+        render_top_gems_previous_month_cards(df)
 
 
 st.subheader("📋 Index:")

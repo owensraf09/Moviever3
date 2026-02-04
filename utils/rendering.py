@@ -179,7 +179,7 @@ def render_table_and_details(df_filtered: pd.DataFrame) -> None:
     )
 
 
-def render_cards(df: pd.DataFrame, cards_per_row: int):
+def render_cards(df: pd.DataFrame, cards_per_row: int = 3):
     # Card view
     cols = st.columns(cards_per_row)
     for idx, (_, movie) in enumerate(df.iterrows()):
