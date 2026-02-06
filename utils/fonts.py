@@ -2,6 +2,7 @@
 Font configuration utilities for Moviever dashboard.
 Applies Cambria (regular, italic, bold) for regular text and Latha for headers/titles.
 """
+
 import streamlit as st
 
 
